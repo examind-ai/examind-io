@@ -1,9 +1,9 @@
 name = "examind-io"
 type = "javascript"
-zone_id = ""
-account_id = ""
-route = ""
-workers_dev = true
+zone_id = "9b2ea228924fbef87fa18aa626e1e1df"
+account_id = "40012233b8e447beb817a05c7d707b7f"
+route = "examind.io/*"
+workers_dev = false
 compatibility_date = "2021-12-28"
 
 [build]
