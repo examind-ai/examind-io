@@ -24,3 +24,7 @@ npm test
 wrangler login
 wrangler publish
 ```
+
+OR
+
+Push `main` branch to GitHub to trigger deployment using GitHub Workflows.
