@@ -1,3 +1,5 @@
+Cloudflare worker that redirects https://examind.io/meet{name} to calendars on HubSpot.
+
 # Setup
 
 ```
