@@ -12,7 +12,10 @@ npm install -g @cloudflare/wrangler
 wrangler dev
 ```
 
-Visit: http://localhost:8787/product
+Visit:
+
+- http://localhost:8787/product
+- http://localhost:8787/meetjohnny
 
 # Test
 
