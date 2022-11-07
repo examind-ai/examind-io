@@ -1,4 +1,9 @@
-import { MEET_BRAD, MEET_GONZO, MEET_JOHNNY } from '../src/constants';
+import {
+  MEET_BRAD,
+  MEET_GONZO,
+  MEET_JOHNNY,
+  STUDENT_HELP,
+} from '../src/constants';
 import { handleRequest } from '../src/handler';
 import makeServiceWorkerEnv from 'service-worker-mock';
 
@@ -48,6 +53,26 @@ describe('handle', () => {
     );
     expect(result.status).toEqual(301);
     expect(result.headers.get('Location')).toEqual(MEET_JOHNNY);
+  });
+
+  test('redirect student-help.examind.io to student help page', async () => {
+    const result = await handleRequest(
+      new Request('https://student-help.examind.io/', {
+        method: 'GET',
+      }),
+    );
+    expect(result.status).toEqual(301);
+    expect(result.headers.get('Location')).toEqual(STUDENT_HELP);
+  });
+
+  test('redirect student-help.examind.io/anything to student help page', async () => {
+    const result = await handleRequest(
+      new Request('https://student-help.examind.io/anything', {
+        method: 'GET',
+      }),
+    );
+    expect(result.status).toEqual(301);
+    expect(result.headers.get('Location')).toEqual(STUDENT_HELP);
   });
 
   test('return 405 for post request', async () => {
