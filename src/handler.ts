@@ -1,3 +1,5 @@
+import { MEET_BRAD, MEET_GONZO, MEET_JOHNNY } from './constants';
+
 const errorHtml = (message: string) => `
   <style>
     body {
@@ -32,13 +34,13 @@ export async function handleRequest(request: Request): Promise<Response> {
   const url = new URL(request.url);
   switch (url.pathname.toLowerCase()) {
     case '/meet':
-      return Response.redirect('https://meetings.hubspot.com/gonzo2', 301);
+      return Response.redirect(MEET_GONZO, 301);
     case '/meetgonzo':
-      return Response.redirect('https://meetings.hubspot.com/gonzo2', 301);
+      return Response.redirect(MEET_GONZO, 301);
     case '/meetbrad':
-      return Response.redirect('https://meetings.hubspot.com/brad503', 301);
+      return Response.redirect(MEET_BRAD, 301);
     case '/meetjohnny':
-      return Response.redirect('https://meetings.hubspot.com/johnny125', 301);
+      return Response.redirect(MEET_JOHNNY, 301);
     default:
       return Response.redirect(
         'https://www.examind.io' + url.pathname + url.search,

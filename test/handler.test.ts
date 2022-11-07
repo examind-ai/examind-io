@@ -1,3 +1,4 @@
+import { MEET_BRAD, MEET_GONZO, MEET_JOHNNY } from '../src/constants';
 import { handleRequest } from '../src/handler';
 import makeServiceWorkerEnv from 'service-worker-mock';
 
@@ -22,9 +23,7 @@ describe('handle', () => {
   test("redirect /meet to Gonzo's calendar", async () => {
     const result = await handleRequest(new Request('/meet', { method: 'GET' }));
     expect(result.status).toEqual(301);
-    expect(result.headers.get('Location')).toEqual(
-      'https://meetings.hubspot.com/gonzo2',
-    );
+    expect(result.headers.get('Location')).toEqual(MEET_GONZO);
   });
 
   test("redirect /MeetGonzo to Gonzo's calendar", async () => {
@@ -32,9 +31,7 @@ describe('handle', () => {
       new Request('/MeetGonzo', { method: 'GET' }),
     );
     expect(result.status).toEqual(301);
-    expect(result.headers.get('Location')).toEqual(
-      'https://meetings.hubspot.com/gonzo2',
-    );
+    expect(result.headers.get('Location')).toEqual(MEET_GONZO);
   });
 
   test("redirect /meetbrad to Brad's calendar", async () => {
@@ -42,9 +39,7 @@ describe('handle', () => {
       new Request('/meetbrad', { method: 'GET' }),
     );
     expect(result.status).toEqual(301);
-    expect(result.headers.get('Location')).toEqual(
-      'https://meetings.hubspot.com/brad503',
-    );
+    expect(result.headers.get('Location')).toEqual(MEET_BRAD);
   });
 
   test("redirect /meetjohnny to Johnny's calendar", async () => {
@@ -52,9 +47,7 @@ describe('handle', () => {
       new Request('/meetjohnny', { method: 'GET' }),
     );
     expect(result.status).toEqual(301);
-    expect(result.headers.get('Location')).toEqual(
-      'https://meetings.hubspot.com/johnny125',
-    );
+    expect(result.headers.get('Location')).toEqual(MEET_JOHNNY);
   });
 
   test('return 405 for post request', async () => {
