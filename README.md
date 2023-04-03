@@ -1,4 +1,7 @@
-Cloudflare worker that redirects https://examind.io/meet{name} to calendars on HubSpot.
+Cloudflare worker that redirects the following:
+
+- https://examind.io/meet{name} to calendars on HubSpot
+- https://student-help.examind.io/ to student help page presentation on Google Drive
 
 # Setup
 
