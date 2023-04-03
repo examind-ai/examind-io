@@ -1,4 +1,10 @@
-import { MEET_BRAD, MEET_GONZO, MEET_JOHNNY, STUDENT_HELP } from './constants';
+import {
+  DOWNLOAD,
+  MEET_BRAD,
+  MEET_GONZO,
+  MEET_JOHNNY,
+  STUDENT_HELP,
+} from './constants';
 
 const errorHtml = (message: string) => `
   <style>
@@ -35,6 +41,9 @@ export async function handleRequest(request: Request): Promise<Response> {
 
   if (url.hostname === 'student-help.examind.io')
     return Response.redirect(STUDENT_HELP, 301);
+
+  if (url.hostname === 'download.examind.io')
+    return Response.redirect(DOWNLOAD, 301);
 
   switch (url.pathname.toLowerCase()) {
     case '/meet':

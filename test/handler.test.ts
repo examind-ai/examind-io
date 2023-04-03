@@ -1,4 +1,5 @@
 import {
+  DOWNLOAD,
   MEET_BRAD,
   MEET_GONZO,
   MEET_JOHNNY,
@@ -73,6 +74,26 @@ describe('handle', () => {
     );
     expect(result.status).toEqual(301);
     expect(result.headers.get('Location')).toEqual(STUDENT_HELP);
+  });
+
+  test('redirect download.examind.io to LeadPages landing page', async () => {
+    const result = await handleRequest(
+      new Request('https://download.examind.io/', {
+        method: 'GET',
+      }),
+    );
+    expect(result.status).toEqual(301);
+    expect(result.headers.get('Location')).toEqual(DOWNLOAD);
+  });
+
+  test('redirect download.examind.io/anything to LeadPages landing page page', async () => {
+    const result = await handleRequest(
+      new Request('https://download.examind.io/anything', {
+        method: 'GET',
+      }),
+    );
+    expect(result.status).toEqual(301);
+    expect(result.headers.get('Location')).toEqual(DOWNLOAD);
   });
 
   test('return 405 for post request', async () => {
