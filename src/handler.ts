@@ -3,6 +3,7 @@ import {
   MEET_BRAD,
   MEET_GONZO,
   MEET_JOHNNY,
+  MEET_MARK,
   STUDENT_HELP,
 } from './constants';
 
@@ -54,6 +55,8 @@ export async function handleRequest(request: Request): Promise<Response> {
       return Response.redirect(MEET_BRAD, 301);
     case '/meetjohnny':
       return Response.redirect(MEET_JOHNNY, 301);
+    case '/meetmark':
+      return Response.redirect(MEET_MARK, 301);
     default:
       return Response.redirect(
         'https://www.examind.io' + url.pathname + url.search,

@@ -3,6 +3,7 @@ import {
   MEET_BRAD,
   MEET_GONZO,
   MEET_JOHNNY,
+  MEET_MARK,
   STUDENT_HELP,
 } from '../src/constants';
 import { handleRequest } from '../src/handler';
@@ -54,6 +55,14 @@ describe('handle', () => {
     );
     expect(result.status).toEqual(301);
     expect(result.headers.get('Location')).toEqual(MEET_JOHNNY);
+  });
+
+  test("redirect /meetmark to Mark's calendar", async () => {
+    const result = await handleRequest(
+      new Request('/meetmark', { method: 'GET' }),
+    );
+    expect(result.status).toEqual(301);
+    expect(result.headers.get('Location')).toEqual(MEET_MARK);
   });
 
   test('redirect student-help.examind.io to student help page', async () => {
