@@ -1,11 +1,4 @@
-import {
-  DOWNLOAD,
-  MEET_BRAD,
-  MEET_GONZO,
-  MEET_JOHNNY,
-  MEET_MARK,
-  STUDENT_HELP,
-} from '../src/constants';
+import { BOOK_DEMO, DOWNLOAD, STUDENT_HELP } from '../src/constants';
 import { handleRequest } from '../src/handler';
 import makeServiceWorkerEnv from 'service-worker-mock';
 
@@ -27,42 +20,30 @@ describe('handle', () => {
     );
   });
 
-  test("redirect /meet to Gonzo's calendar", async () => {
+  test('redirect /meet to www.examind.io/book-demo calendar', async () => {
     const result = await handleRequest(new Request('/meet', { method: 'GET' }));
     expect(result.status).toEqual(301);
-    expect(result.headers.get('Location')).toEqual(MEET_GONZO);
+    expect(result.headers.get('Location')).toEqual(BOOK_DEMO);
   });
 
-  test("redirect /MeetGonzo to Gonzo's calendar", async () => {
+  test('redirect /MeetGonzo to www.examind.io/MeetGonzo', async () => {
     const result = await handleRequest(
       new Request('/MeetGonzo', { method: 'GET' }),
     );
     expect(result.status).toEqual(301);
-    expect(result.headers.get('Location')).toEqual(MEET_GONZO);
+    expect(result.headers.get('Location')).toEqual(
+      'https://www.examind.io/MeetGonzo',
+    );
   });
 
-  test("redirect /meetbrad to Brad's calendar", async () => {
+  test('redirect /meetbrad to www.examind.io/meetbrad', async () => {
     const result = await handleRequest(
       new Request('/meetbrad', { method: 'GET' }),
     );
     expect(result.status).toEqual(301);
-    expect(result.headers.get('Location')).toEqual(MEET_BRAD);
-  });
-
-  test("redirect /meetjohnny to Johnny's calendar", async () => {
-    const result = await handleRequest(
-      new Request('/meetjohnny', { method: 'GET' }),
+    expect(result.headers.get('Location')).toEqual(
+      'https://www.examind.io/meetbrad',
     );
-    expect(result.status).toEqual(301);
-    expect(result.headers.get('Location')).toEqual(MEET_JOHNNY);
-  });
-
-  test("redirect /meetmark to Mark's calendar", async () => {
-    const result = await handleRequest(
-      new Request('/meetmark', { method: 'GET' }),
-    );
-    expect(result.status).toEqual(301);
-    expect(result.headers.get('Location')).toEqual(MEET_MARK);
   });
 
   test('redirect student-help.examind.io to student help page', async () => {
