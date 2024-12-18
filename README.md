@@ -4,16 +4,10 @@ Cloudflare worker that redirects the following:
 - https://student-help.examind.io/ to student help page presentation on Google Drive
 - https://download.examind.io/ to feedback and download page on LeadPagesproduct page presentation on Google Drive
 
-# Setup
-
-```
-npm install -g @cloudflare/wrangler
-```
-
 # Development & Preview
 
 ```
-wrangler dev
+npx wrangler dev
 ```
 
 Visit:
