@@ -1,4 +1,4 @@
 name = "examind-io"
 main = "src/index.ts"
 compatibility_date = "2023-02-13"
-routes = ["examind.io/*", "student-help.examind.io/*", "download.examind.io/*"]
+routes = ["examind.io/*", "student-help.examind.io/*", "instructor-help.examind.io/*", "download.examind.io/*"]
