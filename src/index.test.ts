@@ -10,7 +10,7 @@ import {
 } from 'vitest';
 import { handleRequest } from '.';
 import createFetchMock from 'vitest-fetch-mock';
-import { ROOT_REDIRECTS } from './config';
+import { ROOT_REDIRECTS, PATH_REDIRECTS } from './config';
 
 const fetchMock = createFetchMock(vi);
 fetchMock.enableMocks();
@@ -63,7 +63,7 @@ describe('Worker', () => {
     expect(text).toContain('<style>');
   });
 
-  // Test each redirect in the config
+  // Test each root redirects
   Object.entries(ROOT_REDIRECTS).forEach(
     ([hostname, destinationUrl]) => {
       it(`Redirects ${hostname} to correct destination`, async () => {
@@ -75,6 +75,31 @@ describe('Worker', () => {
       });
     },
   );
+
+  // Test each path-preserving redirects
+  Object.entries(PATH_REDIRECTS).forEach(([hostname, targetUrl]) => {
+    it(`Redirects ${hostname} to ${targetUrl} preserving the path`, async () => {
+      const request = new Request(`https://${hostname}/some/path`);
+      const response = await handleRequest(request);
+
+      expect(response.status).toBe(301);
+      expect(response.headers.get('location')).toBe(
+        `${targetUrl}/some/path`,
+      );
+    });
+
+    it(`Redirects ${hostname} to ${targetUrl} preserving path and query params`, async () => {
+      const request = new Request(
+        `https://${hostname}/path?key=value&other=123`,
+      );
+      const response = await handleRequest(request);
+
+      expect(response.status).toBe(301);
+      expect(response.headers.get('location')).toBe(
+        `${targetUrl}/path?key=value&other=123`,
+      );
+    });
+  });
 
   it('Forwards unknown domains to original URL', async () => {
     const request = new Request('https://unknown.examind.io');

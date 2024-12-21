@@ -5,3 +5,7 @@ export const ROOT_REDIRECTS: { [key: string]: string } = {
     'https://examind.lpages.co/auburn-keynote-download/',
   'instructor-help.examind.io': 'https://examind.gitbook.io/v1',
 };
+
+export const PATH_REDIRECTS: { [key: string]: string } = {
+  'examind.io': 'https://www.examind.io',
+};
