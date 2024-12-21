@@ -1,4 +1,4 @@
-export const REDIRECTS: { [key: string]: string } = {
+export const ROOT_REDIRECTS: { [key: string]: string } = {
   'student-help.examind.io':
     'https://docs.google.com/presentation/d/1NnvhgSAffESvBrRdL_jLtY6isAFxvKtNfgZwooYGQk4/edit?usp=sharing',
   'download.examind.io':

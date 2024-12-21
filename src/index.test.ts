@@ -10,7 +10,7 @@ import {
 } from 'vitest';
 import { handleRequest } from '.';
 import createFetchMock from 'vitest-fetch-mock';
-import { REDIRECTS } from './config';
+import { ROOT_REDIRECTS } from './config';
 
 const fetchMock = createFetchMock(vi);
 fetchMock.enableMocks();
@@ -64,15 +64,17 @@ describe('Worker', () => {
   });
 
   // Test each redirect in the config
-  Object.entries(REDIRECTS).forEach(([hostname, destinationUrl]) => {
-    it(`Redirects ${hostname} to correct destination`, async () => {
-      const request = new Request(`https://${hostname}/whatever`);
-      const response = await handleRequest(request);
+  Object.entries(ROOT_REDIRECTS).forEach(
+    ([hostname, destinationUrl]) => {
+      it(`Redirects ${hostname} to correct destination`, async () => {
+        const request = new Request(`https://${hostname}/whatever`);
+        const response = await handleRequest(request);
 
-      expect(response.status).toBe(301);
-      expect(response.headers.get('location')).toBe(destinationUrl);
-    });
-  });
+        expect(response.status).toBe(301);
+        expect(response.headers.get('location')).toBe(destinationUrl);
+      });
+    },
+  );
 
   it('Forwards unknown domains to original URL', async () => {
     const request = new Request('https://unknown.examind.io');

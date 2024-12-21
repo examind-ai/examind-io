@@ -1,4 +1,4 @@
-import { REDIRECTS } from './config';
+import { ROOT_REDIRECTS } from './config';
 
 export interface Env {
   // Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
@@ -58,7 +58,7 @@ export function handleRequest(request: Request): Promise<Response> {
 
   const url = new URL(request.url);
 
-  const redirectUrl = REDIRECTS[url.hostname];
+  const redirectUrl = ROOT_REDIRECTS[url.hostname];
 
   if (redirectUrl)
     return Promise.resolve(Response.redirect(redirectUrl, 301));
